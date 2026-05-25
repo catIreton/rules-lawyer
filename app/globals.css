@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  .dark {
+    color-scheme: dark;
+  }
+}
+
+/* ── Better prose/markdown ───────────────────────── */
+.prose table {
+  @apply w-full text-sm;
+}
+.prose th {
+  @apply bg-gray-100 dark:bg-gray-700 font-semibold;
+}
+.prose td,
+.prose th {
+  @apply px-3 py-2 border border-gray-200 dark:border-gray-600;
+}
+.prose blockquote {
+  @apply border-l-4 border-blue-400 bg-blue-50 dark:bg-blue-950 dark:border-blue-600 px-4 py-2 not-italic text-gray-700 dark:text-gray-300 rounded-r-lg;
+}
+.prose blockquote p {
+  @apply m-0;
+}
+.prose hr {
+  @apply border-gray-200 dark:border-gray-700;
+}
+.prose h2 {
+  @apply mt-8 first:mt-0;
+}
+
+/* ── Print stylesheet ────────────────────────────── */
+@media print {
+  header,
+  footer,
+  nav,
+  [data-testid="game-card"] .tags,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 11pt;
+  }
+
+  article.prose {
+    max-width: 100%;
+    font-size: 10pt;
+  }
+
+  h1 {
+    font-size: 18pt;
+    margin-bottom: 4pt;
+  }
+
+  h2 {
+    font-size: 13pt;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 2pt;
+    margin-top: 12pt;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 9pt;
+  }
+
+  th,
+  td {
+    border: 1px solid #999;
+    padding: 3pt 6pt;
+  }
+
+  th {
+    background: #eee !important;
+  }
+
+  a[href]::after {
+    content: none;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
