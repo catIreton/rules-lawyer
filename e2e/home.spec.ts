@@ -62,8 +62,8 @@ test.describe('Game detail page', () => {
   })
 
   test('returns 404 for unknown game slug', async ({ page }) => {
-    const response = await page.goto('/games/not-a-real-game')
-    expect(response?.status()).toBe(404)
+    await page.goto('/games/not-a-real-game')
+    await expect(page.getByRole('heading', { name: /not found/i })).toBeVisible()
   })
 })
 
