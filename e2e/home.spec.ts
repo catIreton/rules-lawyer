@@ -18,7 +18,7 @@ test.describe('Home page', () => {
     expect(initialCount).toBeGreaterThan(1)
 
     await page.getByRole('textbox', { name: /search/i }).fill('catan')
-    await expect(page.getByText('Catan')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Catan' })).toBeVisible()
 
     const filteredCount = await page.getByTestId('game-card').count()
     expect(filteredCount).toBeLessThan(initialCount)
@@ -58,7 +58,7 @@ test.describe('Game detail page', () => {
 
   test('game page shows metadata badges', async ({ page }) => {
     await page.goto('/games/catan')
-    await expect(page.getByText(/players/i)).toBeVisible()
+    await expect(page.locator('span', { hasText: /players/i })).toBeVisible()
   })
 
   test('returns 404 for unknown game slug', async ({ page }) => {
@@ -83,6 +83,6 @@ test.describe('Accessibility', () => {
     await page.keyboard.press('Tab')
     const focused = page.getByRole('textbox', { name: /search/i })
     await focused.type('catan')
-    await expect(page.getByText('Catan')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Catan' })).toBeVisible()
   })
 })

@@ -3,7 +3,9 @@ import type { NextConfig } from 'next'
 const isProd = process.env.NODE_ENV === 'production'
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  // output: 'export' only in production — in dev the Next.js server handles routing
+  // normally so that notFound() returns 404 instead of the export constraint throwing 500
+  ...(isProd ? { output: 'export' } : {}),
   // basePath only applies in production — GitHub Pages serves from /rules-lawyer,
   // but the dev server should remain at localhost:3000/
   basePath: isProd ? '/rules-lawyer' : '',
